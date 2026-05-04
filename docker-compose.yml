@@ -1,0 +1,13 @@
+services:
+  ascent:
+    build: .
+    container_name: atmospheric-ascent
+    restart: unless-stopped
+    ports:
+      - "7000:80"
+    networks:
+      - home-lab
+
+networks:
+  home-lab:
+    external: true

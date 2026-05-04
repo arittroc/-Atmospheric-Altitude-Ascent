@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nathu La — Ascend the Pass</title>
+    <meta name="description" content="A 56 km scroll-driven journey from Gangtok to the Indo-Tibetan border at Nathu La, 4,310 m." />
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Mobile notice — hidden on desktop via CSS -->
+    <div id="mobile-notice" style="
+      display: none;
+      position: fixed; inset: 0; z-index: 9999;
+      background: #05080e; color: #e8edf2;
+      font-family: system-ui, sans-serif;
+      place-items: center; text-align: center; padding: 2rem;
+    ">
+      <div>
+        <p style="font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.5; margin-bottom: 1rem;">
+          Best viewed on desktop
+        </p>
+        <p style="font-size: 1.5rem; font-weight: 300; margin-bottom: 0.5rem;">Nathu La</p>
+        <p style="font-size: 0.875rem; opacity: 0.6; max-width: 280px; line-height: 1.6;">
+          This experience is optimised for screens wider than 1024 px.
+        </p>
+      </div>
+    </div>
+    <script>
+      if (window.innerWidth < 1024) {
+        document.getElementById('mobile-notice').style.display = 'grid';
+      }
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
