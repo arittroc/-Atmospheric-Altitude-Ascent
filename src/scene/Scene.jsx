@@ -10,7 +10,7 @@ export function Scene({ progressRef }) {
     <Suspense fallback={null}>
       <CameraRig progressRef={progressRef} />
       <Lighting progressRef={progressRef} />
-      <Mountain />
+      {/* <Mountain /> */}
       <MistField progressRef={progressRef} />
       <SnowField progressRef={progressRef} />
     </Suspense>

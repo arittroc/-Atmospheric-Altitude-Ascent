@@ -86,3 +86,73 @@
   background: white;
   animation: scrollCue 1.8s ease-in-out infinite;
 }
+
+/* Inner page entrance */
+@keyframes pageFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-enter {
+  animation: pageFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Reveal — GSAP sets opacity/transform; this sets initial state */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+/* Gradient text utilities */
+.text-gradient-cyan {
+  background: linear-gradient(135deg, #a5f3fc 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Decorative horizontal rule */
+.rule-thin {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Typewriter cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.cursor-blink::after {
+  content: '|';
+  animation: blink 1.2s step-end infinite;
+  margin-left: 2px;
+  color: rgba(103, 232, 249, 0.8);
+}
+
+/* Warning amber pulse */
+@keyframes amberPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+  50%       { box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.15); }
+}
+
+.warn-pulse {
+  animation: amberPulse 2.4s ease-in-out infinite;
+}
+
+/* Altitude number counter */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.count-enter {
+  animation: countUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}

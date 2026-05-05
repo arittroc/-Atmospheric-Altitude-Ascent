@@ -63,7 +63,14 @@ export function Mountain() {
       const n3 = (fbm(x * 0.65 + 7.0, z * 0.65 + 1.2, 2) - 0.5) * 1.8
       const n4 = (fbm(x * 1.8  + 2.5, z * 1.8  + 8.1, 1) - 0.5) * 0.6
 
-      const h = Math.max(0, base + ridge2 * 0.4 + n1 + n2 + n3 + n4)
+      // Noise adds surface texture only where the mountain structure exists.
+      // Where base=0 and ridge2=0 (sides, foreground, edges), noise is fully
+      // suppressed so it cannot create isolated elevated patches — the source
+      // of the floating grey blob artifact seen in the lower-right viewport.
+      const structureH = base + ridge2 * 0.4
+      const noiseMask = Math.min(1.0, structureH / 5.0)
+
+      const h = Math.max(0, structureH + (n1 + n2 + n3 + n4) * noiseMask)
       pos[i * 3 + 1] = h
 
       // Vertex colors by height
@@ -100,7 +107,7 @@ export function Mountain() {
   }, [])
 
   return (
-    <mesh geometry={geometry} position={[0, -2, 0]} receiveShadow>
+    <mesh geometry={geometry} position={[0, -5, 0]} receiveShadow>
       <meshStandardMaterial
         vertexColors
         roughness={0.88}
