@@ -57,7 +57,7 @@ The scroll driver is a 600vh-tall invisible `div#scroll-proxy`. GSAP ScrollTrigg
 | `/journal` | `JournalPage.jsx` | Historical timeline of the Silk Route and Nathu La |
 | `/gear` | `GearPage.jsx` | Interactive packing checklist, layering system guide |
 
-All content pages share `PageLayout.jsx` which provides the nav, footer, background image, vignette overlays, and film grain.
+All content pages share `PageLayout.jsx` which provides the nav, two footer layers (an inline scroll-area `Footer` with logo and nav links, and the imported fixed frosted-glass `SiteFooter` from `ui/Footer.jsx`), background image, vignette overlays, and film grain.
 
 ---
 
@@ -112,7 +112,7 @@ public/
 
 notes/                        This folder — project documentation
 index.html                    HTML root, mobile notice, meta tags
-vite.config.js                Vite config, vendor code splitting
+vite.config.js                Vite config, vendor code splitting, server host: true
 tailwind.config.js            Custom font families
 postcss.config.js
 Dockerfile
@@ -126,13 +126,13 @@ nginx.conf
 
 **Nav** — Fixed frosted-glass pill at top. Shows logo, 5 nav links, a live status chip (pass hours), and an "Apply for permit" CTA button. Uses `useLocation` to highlight the active route.
 
-**HeroCard** — Full-screen centered title card. Fades, blurs, and slides up as scroll progress passes 15%. Renders `null` when fully transparent so it doesn't block interaction.
+**HeroCard** — Full-screen centered title card. Fades, blurs, and slides up as scroll progress passes 15%. Renders `null` when fully transparent so it doesn't block interaction. All four text elements (kicker, "Nathu La" heading, "the Listening Ear" subtitle, body paragraph) are solid white (`text-white`, `#ffffff`) with a three-layer deep drop shadow: `0 2px 8px rgba(0,0,0,1), 0 4px 32px rgba(0,0,0,0.95), 0 8px 64px rgba(0,0,0,0.8)`. No gradient fill or opacity modifier on hero text.
 
-**WaypointCard** — Sliding info card for each key location. Accepts `entryProgress` and `exitProgress` to control when it appears and disappears. Left-aligned for Tsomgo Lake, right-aligned for the summit. Contains a stats grid and optionally a 24-hour weather forecast strip.
+**WaypointCard** — Sliding info card for each key location. Accepts `entryProgress` and `exitProgress` to control when it appears and disappears. Left-aligned for Tsomgo Lake, right-aligned for the summit. Contains a stats grid and optionally a 24-hour weather forecast strip. An absolute-positioned `linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.0) 80%)` overlay sits at the top of the card for text legibility against background photos.
 
 **Altimeter** — Fixed to the right edge. Shows current altitude as a number, a vertical progress rail with glowing dot, tick marks for 5 waypoints, and a compass/grade dial that rotates 270° from start to finish.
 
-**StatusBar** — Fixed bottom-left. Shows distance covered (km), ETA (time string), and surface type (road name changes at thresholds).
+**StatusBar** — Fixed `bottom-14 left-6`. Shows distance covered (km), ETA (time string), and surface type (road name changes at thresholds). Positioned at `bottom-14` (not `bottom-6`) to sit clear of the fixed frosted-glass footer.
 
 **AltitudeChip** — Fixed top-right. Compact altitude readout. Visible on large screens only.
 
@@ -180,9 +180,9 @@ Custom animations: `softPulse` (live indicator dot), `scrollCue` (descending lin
 
 ## 9. Build & Deployment
 
-`npm run dev` — Vite dev server with HMR.
+`npm run dev` — Vite dev server with HMR. Listens on all interfaces (`host: true` in `vite.config.js`) so it is reachable at both `localhost:5173` and the machine's LAN IP.
 `npm run build` — Production build to `/dist`.
 
 Vite config splits vendor chunks: `three-vendor` (Three.js + R3F), `gsap-vendor` (GSAP + Lenis), `react-vendor` (React + ReactDOM). Keeps individual chunk sizes small.
 
-A `Dockerfile` + `nginx.conf` are included for containerised deployment. `docker-compose.yml` covers local container dev. The project is also hosted on a home server at `192.168.29.100:5173` (dev mode via `nohup npm run dev -- --host 0.0.0.0`).
+A `Dockerfile` + `nginx.conf` are included for containerised deployment. `docker-compose.yml` covers local container dev. The project is also hosted on a home server at `192.168.29.100:5173`. The home server remote (`skyie@192.168.29.100:~/Ascend-the-Pass`) is configured with `receive.denyCurrentBranch ignore`; after each push a `git reset --hard HEAD` on the server syncs the working tree and Vite hot-reloads automatically.

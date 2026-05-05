@@ -97,13 +97,13 @@ The result is that the WebGL particles and camera feel embedded in a photographi
 
 These are all `fixed` position elements layered over the Canvas at `z-index: 30`.
 
-**HeroCard** — The opening screen. Fades, blurs, and translates upward as progress passes 15%. Returns `null` at full transparency so it doesn't intercept pointer events. The eyebrow kicker ("EAST SIKKIM · OLD SILK ROUTE"), the main "Nathu La" heading, and the "the Listening Ear" subtitle all carry a Tailwind arbitrary `text-shadow` (`0 2px 24px rgba(0,0,0,0.70), 0 1px 4px rgba(0,0,0,0.50)`) to cut through bright photo backgrounds without affecting the body copy, scroll cue, or any HUD element.
+**HeroCard** — The opening screen. Fades, blurs, and translates upward as progress passes 15%. Returns `null` at full transparency so it doesn't intercept pointer events. All four text elements — the eyebrow kicker ("EAST SIKKIM · OLD SILK ROUTE"), the main "Nathu La" heading, "the Listening Ear" subtitle, and the body paragraph — are solid white (`text-white`, no opacity modifier) with a three-layer drop shadow applied via Tailwind arbitrary value: `[text-shadow:0_2px_8px_rgba(0,0,0,1),0_4px_32px_rgba(0,0,0,0.95),0_8px_64px_rgba(0,0,0,0.8)]`. Layer 1 is tight full-black for crisp letter edges; layer 2 is a medium dark halo; layer 3 is a wide soft atmospheric glow. The `hero-gradient` class (which applied a gold/amber gradient fill) was removed from "Nathu La" and the "Listening Ear" inner span — both are plain white. The scroll cue is not affected.
 
-**WaypointCard** — The most complex HUD component. Each card has an `entryProgress` and `exitProgress`. Between those values it's visible. Within a `FADE_RANGE = 0.06` at each boundary it interpolates opacity and vertical translation. Two instances: Tsomgo Lake (left-aligned, appears at 0.40–0.65) and Nathu La Summit (right-aligned, appears at 0.75–1.0). Each card has a stats grid and the summit card includes a 24-hour weather forecast strip with glyphs for sun, cloud, and snow.
+**WaypointCard** — The most complex HUD component. Each card has an `entryProgress` and `exitProgress`. Between those values it's visible. Within a `FADE_RANGE = 0.06` at each boundary it interpolates opacity and vertical translation. Two instances: Tsomgo Lake (left-aligned, appears at 0.40–0.65) and Nathu La Summit (right-aligned, appears at 0.75–1.0). Each card has a stats grid and the summit card includes a 24-hour weather forecast strip with glyphs for sun, cloud, and snow. A top gradient overlay (`linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.0) 80%)`) is absolutely positioned inside the card to ensure text is legible when the card's background photo is bright.
 
 **Altimeter** — The most visually detailed component. A vertical rail with a gradient fill that rises from 0% to `progress * 100%`. A glowing white dot rides the top of the fill. Five tick marks with labels and altitude numbers that light up white when the climber reaches them. Below the rail, a compass-style circular dial where the needle rotates 270° over the full journey.
 
-**StatusBar** — Shows distance in km (56 * progress), a simulated ETA that ticks from 04:12 to 04:42, and surface type (NH-310 highway → Jelep La road → BRO snow track).
+**StatusBar** — Shows distance in km (56 * progress), a simulated ETA that ticks from 04:12 to 04:42, and surface type (NH-310 highway → Jelep La road → BRO snow track). Positioned at `bottom-14` (not `bottom-6`) so it clears the fixed frosted-glass footer bar.
 
 **AltitudeChip** — Compact top-right readout. `getAltitude(progress)` linearly interpolates between 1,650m (Gangtok) and 4,310m (Nathu La).
 
@@ -149,7 +149,7 @@ Each page uses a `useReveal` hook (GSAP ScrollTrigger on `[data-reveal]` element
 
 **`Root.jsx`** — Wraps the app in `BrowserRouter` and defines the five routes. The `ScrollToTop` component listens to `useLocation` and calls `window.scrollTo(0, 0)` on each route change — without this, navigating to a content page would land mid-scroll.
 
-**`vite.config.js`** — `optimizeDeps.include` pre-bundles the heavy libraries so Vite's dev server doesn't need to convert them on first request. `manualChunks` in the build config splits Three.js, GSAP, and React into separate cache-able files.
+**`vite.config.js`** — `optimizeDeps.include` pre-bundles the heavy libraries so Vite's dev server doesn't need to convert them on first request. `manualChunks` in the build config splits Three.js, GSAP, and React into separate cache-able files. A `server` block sets `host: true` and `port: 5173` — the dev server binds to all interfaces automatically, making it reachable at the machine's LAN IP without passing `--host` on the command line.
 
 **`index.html`** — Has a mobile notice: a fixed overlay that displays if `window.innerWidth < 1024`. The experience is desktop-only (the scroll-driven 3D camera and HUD layout require space). The overlay is pure HTML/CSS/JS, no React — it runs before the bundle loads.
 
@@ -171,10 +171,24 @@ Cloned and running on home server at `192.168.29.100:5173` via `nohup npm run de
 
 Also running locally at `localhost:5173`.
 
-**Latest commit — `feat: add frosted footer and hero text shadows`**
+**Recent commits (chronological)**
+
+`feat: add frosted footer and hero text shadows`
 - Added `src/ui/Footer.jsx`: fixed frosted-glass attribution bar with GitHub and LinkedIn icon links
-- Updated `src/ui/HeroCard.jsx`: text-shadow applied to kicker, "Nathu La" heading, and "the Listening Ear" subtitle
+- Updated `src/ui/HeroCard.jsx`: text-shadow applied to kicker, "Nathu La" heading, "the Listening Ear" subtitle
 - Updated `src/App.jsx`: imports and renders `<Footer />` outside the Canvas tree
+
+`feat: strengthen hero text shadows, lift status bar, add waypoint gradient overlay`
+- `HeroCard.jsx`: increased all three shadow layers for stronger contrast against bright backgrounds
+- `StatusBar.jsx`: moved from `bottom-6` to `bottom-14` to clear the frosted footer
+- `WaypointCard.jsx`: added top-to-bottom dark gradient overlay inside the card glass
+- `PageLayout.jsx`: imports and renders both the inline `<Footer />` (logo + nav links) and `<SiteFooter />` (frosted attribution bar) in the content page layout
+
+`feat: expose vite dev server to network (host: true)`
+- `vite.config.js`: added `server: { host: true, port: 5173 }` — no `--host` flag needed on the command line
+
+`fix: force hero text to solid white with deep drop shadow`
+- `HeroCard.jsx`: all four text elements (kicker, "Nathu La", "the Listening Ear", body paragraph) set to solid `text-white` — opacity modifiers removed, `hero-gradient` class removed; shadow updated to `0 2px 8px rgba(0,0,0,1), 0 4px 32px rgba(0,0,0,0.95), 0 8px 64px rgba(0,0,0,0.8)`
 
 ---
 

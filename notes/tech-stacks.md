@@ -44,7 +44,7 @@ Monospace font. Used for all HUD labels, coordinates, tracking numbers, uppercas
 ## Dev Dependencies
 
 ### Vite (`vite`) + `@vitejs/plugin-react`
-Build tool and dev server. Provides ES-module-native HMR (fast reloads without full refresh), out-of-the-box JSX transform via the React plugin, and Rollup-based production bundling. `vite.config.js` sets `optimizeDeps` to pre-bundle `three`, `@react-three/fiber`, `@react-three/drei`, and `gsap` — these are large CommonJS packages that Vite would otherwise convert slowly on first load. Manual chunk splitting keeps the largest bundle (Three.js) isolated.
+Build tool and dev server. Provides ES-module-native HMR (fast reloads without full refresh), out-of-the-box JSX transform via the React plugin, and Rollup-based production bundling. `vite.config.js` sets `optimizeDeps` to pre-bundle `three`, `@react-three/fiber`, `@react-three/drei`, and `gsap` — these are large CommonJS packages that Vite would otherwise convert slowly on first load. Manual chunk splitting keeps the largest bundle (Three.js) isolated. The `server` block sets `host: true` and `port: 5173` so the dev server binds to all interfaces — no `--host` flag needed on the command line, and it is accessible from the home server's LAN IP directly.
 
 ### Tailwind CSS (`tailwindcss`) + PostCSS + Autoprefixer
 Utility-first CSS framework. Used for layout, spacing, typography scale, colours, hover states, responsive prefixes (`md:`, `lg:`), and transitions. Custom config adds the three font families. `globals.css` layers custom component classes (`.glass`, `.glass-strong`, `.hairline`) and utility classes (`.hero-gradient`, `.text-gradient-cyan`) on top of Tailwind's utilities. Autoprefixer adds vendor prefixes automatically for `backdrop-filter`.
@@ -84,6 +84,6 @@ Three.js + R3F together is ~800 KB unminified. Splitting it into its own chunk (
 | Tool | Purpose |
 |---|---|
 | Docker + nginx | Containerised production deployment |
-| `nohup npm run dev` | Long-running dev server on home server |
+| `nohup npm run dev` | Long-running dev server on home server (`host: true` in config — no extra flags needed) |
 | Git + GitHub | Version control, remote at `github.com/arittroc/-Atmospheric-Altitude-Ascent` |
-| VS Code / Claude Code | Editor and AI-assisted development |
+| VS Code | Editor |
