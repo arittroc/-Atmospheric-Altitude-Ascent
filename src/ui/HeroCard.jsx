@@ -22,7 +22,7 @@ export default function HeroCard({ progress }) {
         {/* Eyebrow */}
         <div className="flex items-center justify-center gap-3 mb-8">
           <span className="h-px w-10 bg-white/30" />
-          <span className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/60 [text-shadow:0_2px_28px_rgba(0,0,0,0.85),0_4px_64px_rgba(0,0,0,0.6),0_1px_4px_rgba(0,0,0,0.9)]">
+          <span className="font-mono text-[10px] tracking-[0.4em] uppercase text-white [text-shadow:0_2px_8px_rgba(0,0,0,1),0_4px_32px_rgba(0,0,0,0.95),0_8px_64px_rgba(0,0,0,0.8)]">
             East Sikkim · Old Silk Route · 04 — 06 May
           </span>
           <span className="h-px w-10 bg-white/30" />
@@ -30,17 +30,17 @@ export default function HeroCard({ progress }) {
 
         {/* Main title */}
         <h1 className="font-serif font-light leading-[0.95] tracking-tight">
-          <span className="block hero-gradient text-[clamp(64px,12vw,176px)] [text-shadow:0_2px_28px_rgba(0,0,0,0.85),0_4px_64px_rgba(0,0,0,0.6),0_1px_4px_rgba(0,0,0,0.9)]">
+          <span className="block text-white text-[clamp(64px,12vw,176px)] [text-shadow:0_2px_8px_rgba(0,0,0,1),0_4px_32px_rgba(0,0,0,0.95),0_8px_64px_rgba(0,0,0,0.8)]">
             Nathu La
           </span>
-          <span className="block text-[clamp(26px,4vw,54px)] italic font-light text-white/70 mt-2 [text-shadow:0_2px_28px_rgba(0,0,0,0.85),0_4px_64px_rgba(0,0,0,0.6),0_1px_4px_rgba(0,0,0,0.9)]">
+          <span className="block text-[clamp(26px,4vw,54px)] italic font-light text-white mt-2 [text-shadow:0_2px_8px_rgba(0,0,0,1),0_4px_32px_rgba(0,0,0,0.95),0_8px_64px_rgba(0,0,0,0.8)]">
             the&nbsp;
-            <span className="hero-gradient not-italic font-light">Listening Ear</span>
+            <span className="text-white not-italic font-light">Listening Ear</span>
           </span>
         </h1>
 
         {/* Body */}
-        <p className="mt-10 max-w-md mx-auto text-[14px] leading-relaxed text-white/65 font-light [text-shadow:0_2px_28px_rgba(0,0,0,0.85),0_4px_64px_rgba(0,0,0,0.6),0_1px_4px_rgba(0,0,0,0.9)]">
+        <p className="mt-10 max-w-md mx-auto text-[14px] leading-relaxed text-white font-light [text-shadow:0_2px_8px_rgba(0,0,0,1),0_4px_32px_rgba(0,0,0,0.95),0_8px_64px_rgba(0,0,0,0.8)]">
           A 56-kilometre weekend ascent from Gangtok through Tsomgo Lake and
           Baba Mandir to the 4,310&nbsp;m Indo-Tibetan border on the old Silk Route.
         </p>
