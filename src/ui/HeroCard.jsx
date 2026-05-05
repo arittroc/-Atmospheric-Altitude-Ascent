@@ -22,7 +22,7 @@ export default function HeroCard({ progress }) {
         {/* Eyebrow */}
         <div className="flex items-center justify-center gap-3 mb-8">
           <span className="h-px w-10 bg-white/30" />
-          <span className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/60">
+          <span className="font-mono text-[10px] tracking-[0.4em] uppercase text-white/60 [text-shadow:0_2px_24px_rgba(0,0,0,0.70),0_1px_4px_rgba(0,0,0,0.50)]">
             East Sikkim · Old Silk Route · 04 — 06 May
           </span>
           <span className="h-px w-10 bg-white/30" />
@@ -30,10 +30,10 @@ export default function HeroCard({ progress }) {
 
         {/* Main title */}
         <h1 className="font-serif font-light leading-[0.95] tracking-tight">
-          <span className="block hero-gradient text-[clamp(64px,12vw,176px)]">
+          <span className="block hero-gradient text-[clamp(64px,12vw,176px)] [text-shadow:0_2px_24px_rgba(0,0,0,0.70),0_1px_4px_rgba(0,0,0,0.50)]">
             Nathu La
           </span>
-          <span className="block text-[clamp(26px,4vw,54px)] italic font-light text-white/70 mt-2">
+          <span className="block text-[clamp(26px,4vw,54px)] italic font-light text-white/70 mt-2 [text-shadow:0_2px_24px_rgba(0,0,0,0.70),0_1px_4px_rgba(0,0,0,0.50)]">
             the&nbsp;
             <span className="hero-gradient not-italic font-light">Listening Ear</span>
           </span>

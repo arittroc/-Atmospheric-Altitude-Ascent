@@ -10,6 +10,7 @@ import AltitudeChip from './ui/AltitudeChip'
 import { useScrollProgress } from './hooks/useScrollProgress'
 import { useLenis } from './hooks/useLenis'
 import { WAYPOINTS } from './data/waypoints'
+import Footer from './ui/Footer'
 
 function smoothstep(a, b, x) {
   const t = Math.max(0, Math.min(1, (x - a) / (b - a)))
@@ -180,6 +181,8 @@ export default function App() {
         <StatusBar progress={progress} />
         <AltitudeChip progress={progress} />
       </div>
+
+      <Footer />
     </div>
   )
 }
