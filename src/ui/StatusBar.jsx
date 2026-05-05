@@ -9,7 +9,7 @@ export default function StatusBar({ progress }) {
   const etaStr   = `04:${String(etaMin).padStart(2, '0')}`
 
   return (
-    <div className="fixed bottom-6 left-6 z-40 hidden md:block pointer-events-none select-none">
+    <div className="fixed bottom-14 left-6 z-40 hidden md:block pointer-events-none select-none">
       <div className="glass rounded-2xl px-5 py-3 flex items-center gap-6">
 
         <div>

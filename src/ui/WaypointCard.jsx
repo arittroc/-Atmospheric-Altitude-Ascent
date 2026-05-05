@@ -76,6 +76,13 @@ export default function WaypointCard({
     >
       <article className="glass-strong rounded-3xl p-8 w-[420px] max-w-[90vw] relative overflow-hidden">
 
+        {/* Top gradient for text legibility against background photo */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.0) 80%)' }}
+          aria-hidden="true"
+        />
+
         {/* Grain texture */}
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.035] mix-blend-overlay"

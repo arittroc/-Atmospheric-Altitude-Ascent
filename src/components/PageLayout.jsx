@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Nav from '../ui/Nav'
+import SiteFooter from '../ui/Footer'
 
 function Footer() {
   return (
@@ -86,6 +87,7 @@ export default function PageLayout({ children, heroImage = '/textures/nathula-pa
       </main>
 
       <Footer />
+      <SiteFooter />
     </div>
   )
 }
